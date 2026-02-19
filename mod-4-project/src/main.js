@@ -1,5 +1,5 @@
-import { getSingleArt } from "./fetch-helper.js"
-import { renderSingleArt } from "./dom-helper.js"
+import { getSingleArt } from "./fetch-helpers.js"
+import { renderSingleArt } from "./dom-helpers.js"
 
 
 getSingleArt(12345).then((result) =>{
