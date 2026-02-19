@@ -10,8 +10,8 @@ export const renderCollection = (collection) => {
         const artistP = document.createElement('p');
 
         li.dataset.id = painting.id;
-
-        img.src = painting.thumbnail?.lqip || '';
+        img.src = `https://www.artic.edu/iiif/2/${painting.image_id}/full/843,/0/default.jpg`
+        //img.src = painting.thumbnail?.lqip || '';
         img.alt = painting.thumbnail?.alt_text || painting.title;
 
         titleH3.textContent = painting.title;
@@ -35,7 +35,7 @@ export const renderSingleArt = (art) =>{
     const h2 = document.createElement('h2') 
    
     h2.textContent = art.title
-    img.src = img.src = `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
+   img.src = `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
     img.alt = art.title
     
 
