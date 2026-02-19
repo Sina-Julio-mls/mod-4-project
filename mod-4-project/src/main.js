@@ -7,6 +7,6 @@ getSingleArt(12345).then((result) =>{
     console.log("Failed to load art work")
     return;
   }
-   renderSingleArt(result.data)
+   //renderSingleArt(result.data)
   console.log(result)
 });
