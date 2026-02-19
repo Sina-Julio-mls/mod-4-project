@@ -1,7 +1,7 @@
 export const renderCollection = (collection) => {
     const collectionList = document.querySelector('#collection-list');
 
-    collectionList.replaceChildren();
+    // collectionList.replaceChildren();
 
     collection.forEach((painting) => {
         const li = document.createElement('li');
