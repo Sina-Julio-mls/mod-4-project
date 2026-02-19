@@ -1,6 +1,7 @@
 export const getCollection = async() => {
     try{
         const response = await fetch('https://api.artic.edu/api/v1/artworks?fields=id,title,artist_display,image_id&is_public_domain=true');
+        //const response = await fetch('https://api.artic.edu/api/v1/artworks?fields=id,title,artist_display,thumbnail');
         if (!response.ok) {
             throw new Error('Failed to get collection!');
         }
