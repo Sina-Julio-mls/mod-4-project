@@ -11,7 +11,7 @@ export const renderCollection = (collection) => {
 
         li.dataset.id = painting.id;
 
-        img.src = painting.thumbnail?.lqip || '';
+        img.src = `https://www.artic.edu/iiif/2/${painting.image_id}/full/843,/0/default.jpg`;
         img.alt = painting.thumbnail?.alt_text || painting.title;
 
         titleH3.textContent = painting.title;
