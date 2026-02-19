@@ -15,3 +15,21 @@ export const getCollection = async() => {
     }
 }
 
+
+
+
+export const getSingleArt = async (id) =>{
+    try{
+        const response = await fetch(`https://api.artic.edu/api/v1/artworks/${id}`)
+        
+        if(!response.ok){
+            throw new Error("Failed to fetch art!")
+        }
+        const result = await response.json()
+        return { data: result.data, error: null}
+    }
+    catch(error){
+        console.warn(error.message)
+        return { data: null, error };
+    }
+};
