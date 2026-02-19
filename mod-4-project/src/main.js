@@ -1,6 +1,6 @@
-import { getSingleArt, getCollection } from "./fetch-helpers.js";
+import { getSingleArt, getCollection, searchPaintings } from "./fetch-helpers.js";
 import { renderSingleArt, renderCollection } from "./dom-helpers.js";
-const collectionList = document.querySelector('collection-list');
+const collectionList = document.querySelector('#collection-list');
 const errorMessage = document.querySelector('#error-message');
 const searchForm = document.querySelector('#search-item');
 
@@ -43,7 +43,7 @@ collectionList.addEventListener('click', (event) => {
 });
 
 searchForm.addEventListener('submit', async (event) => {
-    event.preventDefault;
+    event.preventDefault();
 
     const formData = new FormData(searchForm);
     const query = formData.get('query');
@@ -60,4 +60,4 @@ searchForm.addEventListener('submit', async (event) => {
     renderCollection(result.data);
     
     searchForm.reset();
-})
+});

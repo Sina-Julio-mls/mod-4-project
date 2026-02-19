@@ -1,6 +1,6 @@
 export const getCollection = async() => {
     try{
-        const response = await fetch('https://api.artic.edu/api/v1/artworks?fields=id,title,artist_display,image_id');
+        const response = await fetch('https://api.artic.edu/api/v1/artworks?fields=id,title,artist_display,image_id&is_public_domain=true');
         if (!response.ok) {
             throw new Error('Failed to get collection!');
         }
@@ -15,7 +15,7 @@ export const getCollection = async() => {
     }
 }
 
-export const getSingleArt = async (id) =>{
+export const getSingleArt = async (id) => {
     try{
         const response = await fetch(`https://api.artic.edu/api/v1/artworks/${id}`)
         
@@ -31,9 +31,9 @@ export const getSingleArt = async (id) =>{
     }
 };
 
-export const searchPaintings = async (query) =>{
+export const searchPaintings = async (query) => {
     try {
-        const response = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${query}`);
+        const response = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${encodeURIComponent(query)}&is_public_domain=true`);
 
         if(!response.ok) {
             throw new Error('Failed to search painting!');
