@@ -5,19 +5,27 @@ export const renderCollection = (collection) => {
 
     collection.forEach((painting) => {
         const li = document.createElement('li');
-        const img = document.createElement('img');
         const titleH3 = document.createElement('h3');
         const artistP = document.createElement('p');
 
         li.dataset.id = painting.id;
-        img.src = `https://www.artic.edu/iiif/2/${painting.image_id}/full/843,/0/default.jpg`
-        //img.src = painting.thumbnail?.lqip || '';
-        img.alt = painting.thumbnail?.alt_text || painting.title;
+
+        if(painting.image_id){
+            const img = document.createElement('img');
+            img.src = `https://www.artic.edu/iiif/2/${painting.image_id}/full/843,/0/default.jpg`;
+            img.alt = `${painting.title} by ${painting.artist_display}`;
+
+            img.onerror = () => {
+            img.remove();
+            };
+            
+            li.append(img);
+        }
 
         titleH3.textContent = painting.title;
         artistP.textContent = painting.artist_display;
 
-        li.append(img, titleH3, artistP);
+        li.append(titleH3, artistP);
         collectionList.append(li);
     })
 }
