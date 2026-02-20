@@ -8,32 +8,35 @@
     <link rel="stylesheet" href="src/style.css">
   </head>
 <body>
-  <div class="container">
-    <h1 class="header">Art collection</h1>
+  <header>
+    <h1>Art collection</h1>
+  </header>
+  <main>
+    <div class="container">
 
-    <div class="art-container">
-      <form class="art-container-flex" id="search-item">
-        <input type="text" id="search">
-        <button class="search-button" type="submit">Search bar</button>
-      </form>
-      <button class="random-button" id="random">Random search</button>
+      <div class="art-container">
+        <form class="art-container-flex" id="search-item">
+          <input type="text" id="search">
+          <button class="search-button" type="submit">Search bar</button>
+        </form>
+        <button class="random-button" id="random">Random search</button>
 
-      <p>Search for your favorite art work</p>
+        <p>Search for your favorite art work</p>
+      </div>
     </div>
-  </div>
     <section id="collection">
       <h2>Paintings</h2>
       <ul id="collection-list">
             
       </ul>
 
-
-  <h2>Single art</h2>
-    <div class="container">
-      <div id="single-art-container"></div>
-    </div>
+      <h2>Single art</h2>
+      <div class="container">
+        <div id="single-art-container"></div>
+      </div>
 
     </section>
-    <script type="module" src="src/main.js"></script>
+  </main>
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>
