@@ -111,3 +111,21 @@ searchForm.addEventListener('submit', async (event) => {
     
     searchForm.reset();
 });
+
+
+//Event lister for one time // Click on collection item
+collectionList.addEventListener("click", async (event) => {
+  const clickedItem = event.target.closest("li");
+  if (!clickedItem) return;
+
+  const id = clickedItem.dataset.id;
+
+  const result = await getSingleArt(id);
+
+  if (result.error) {
+    console.error(result.error.message);
+    return;
+  }
+
+  renderSingleArt(result.data);
+});

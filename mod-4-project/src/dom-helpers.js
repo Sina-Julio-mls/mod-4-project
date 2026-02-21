@@ -33,7 +33,6 @@ export const renderCollection = (collection) => {
 
 
 
-const singleArt = document.getElementById('single-art-container')
 const section = document.querySelector('#single-art-container')
 
 export const renderSingleArt = (art) =>{
