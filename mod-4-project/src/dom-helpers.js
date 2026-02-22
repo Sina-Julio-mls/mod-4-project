@@ -1,13 +1,14 @@
-export const renderCollection = (collection) => {
-    const collectionList = document.querySelector('#collection-list');
+// const singleArtContainer = document.querySelector('#single-art-container')
+// const collectionList = document.querySelector('#collection-list');
 
-    // collectionList.replaceChildren();
+//Render collection list
+export const renderCollection = (collection) => {
+    const collectionList = document.getElementById('collection-list');
+    collectionList.innerHTML = ''; // clear previous collection
+
 
     collection.forEach((painting) => {
         const li = document.createElement('li');
-        const titleH3 = document.createElement('h3');
-        const artistP = document.createElement('p');
-
         li.dataset.id = painting.id;
 
         if(painting.image_id){
@@ -15,37 +16,54 @@ export const renderCollection = (collection) => {
             img.src = `https://www.artic.edu/iiif/2/${painting.image_id}/full/843,/0/default.jpg`;
             img.alt = `${painting.title} by ${painting.artist_display}`;
 
-            img.onerror = () => {
+            img.onerror = () => 
             img.remove();
-            };
-            
             li.append(img);
-        }
+            }
+        
+        const titleH3 = document.createElement('h3');
+        const artistP = document.createElement('p');
 
         titleH3.textContent = painting.title;
         artistP.textContent = painting.artist_display;
 
         li.append(titleH3, artistP);
         collectionList.append(li);
-    })
-}
+    });
+};
 
-
-
-
-const singleArt = document.getElementById('single-art-container')
-const section = document.querySelector('#single-art-container')
-
+//Render single artwork
 export const renderSingleArt = (art) =>{
-    section.innerHTML = ''
+    const section = document.getElementById('single-art-container');
+    section.innerHTML = "";
+
+    //close button
+    const closeBtn = document.createElement('button');
+    closeBtn.id = 'close-single';
+    closeBtn.textContent = 'Close';
     
     const img = document.createElement('img')
     const h2 = document.createElement('h2') 
-   
-    h2.textContent = art.title
-   img.src = `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
-    img.alt = art.title
-    
+    const artwork = document.createElement('p')
+    const year = document.createElement('p')
+    const credit = document.createElement('p')
+    const description = document.createElement('p')
+    const history = document.createElement('p')
+    const place = document.createElement('p')
 
-    section.append(img,h2)
+   
+
+    
+    img.src = `https://www.artic.edu/iiif/2/${art.image_id}/full/843,/0/default.jpg`
+    img.alt = art.title
+    h2.textContent = `Title: ${art.title}`
+    artwork.textContent = `Artwork Type: ${art.artwork_type_title}`
+    year.textContent = `Year: ${art.fiscal_year}`
+    credit.textContent = `Credit: ${art.credit_line}`
+    description.textContent = `Description: ${art.description}`
+    place.textContent = `Place of orgign: ${art.place_of_origin}`
+    
+   
+
+    section.append(closeBtn,img,h2,artwork,year,credit,place,description)
 };

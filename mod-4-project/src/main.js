@@ -1,113 +1,99 @@
-const collectionList = document.querySelector('#collection-list');
-const errorMessage = document.querySelector('#error-message');
-const searchForm = document.querySelector('#search-item');
-import { getSingleArt, getCollection } from "./fetch-helpers.js"
-import { renderCollection, renderSingleArt} from "./dom-helpers.js"
+// import { renderCollection } from "./dom-helpers.js";
+// import { getCollection, getSingleArt } from "./fetch-helpers.js";
 
-
-// getSingleArt(12345).then((result) =>{
-//   if (!result.data){
-//     console.log("Failed to load art work")
-//     return;
-//   }
-//    renderSingleArt(result.data)
-//   console.log(result)
-// });
-
-getSingleArt(12345)
-  .then((result) => {
-    console.log("Full result:", result.data);
-
-    if (!result.data || !result.data) {
-      console.log("Failed to load artwork");
-      return;
-    }
-
-    renderSingleArt(result.data);
-  })
-  .catch((error) => {
-    console.error("Fetch failed:", error);
-  });
-
-getCollection()
-  .then((result) => {
-    console.log("Full result:", result);
-
-    if (!result.data) {
-      console.log("Failed to load collection");
-      return;
-    }
-
-    renderCollection(result.data);
-  })
-  .catch((error) => {
-    console.error("Fetch failed:", error);
-  });
-
-// getSingleArt(27992)
-//   .then((result) => {
-//     console.log("Result:", result.data);
-//   });
-
-// getCollection(1234)
-// .then((data) =>{
-//     console.log(data)
+// getCollection().then((result) =>{
+//     console.log(result.data)
+// })
+// let id = 27992
+// getSingleArt(id).then((result)=>{
+//     console.log(result.data)
 // })
 
-getSingleArt(12345).then((result) =>{
-  if (!result.data){
-    console.log("Failed to load art work")
-    return;
-  }
-   //renderSingleArt(result.data)
-  console.log(result)
-});
+import { getCollection, getSingleArt, searchPaintings } from "./fetch-helpers.js";
+import { renderCollection, renderSingleArt } from "./dom-helpers.js";
 
-getCollection()
-    .then(result => {
-        if(result.error) {
-            errorMessage.textContent = result.error.message;
-            return;
-        }
-        errorMessage.textContent = '';
-        renderCollection(result.data);  
-    })
+const errorMessage = document.querySelector('#error-message');
+const collectionList = document.querySelector('#collection-list');
+const searchForm = document.querySelector('#search-item');
+const singleArtContainer = document.getElementById('single-art-container');
+const collectionSection = document.getElementById('collection');
+const randomBtn = document.getElementById('random');
 
-collectionList.addEventListener('click', (event) => {
-    const clickedPainting = event.target.closest('li');
+let collectionCache = []; // Store collection for random button and search
 
-    if (!clickedPainting) return;
-
-    const paintingId = clickedPainting.dataset.id;
-
-    getSingleArt(paintingId).then(result => {
-        if(result.error) {
-            document.querySelector('#error-message').textContent = result.error.message;
-            return;
-        }
-
-        document.querySelector('#error-message').textContent = '';
-
-        renderSingleArt(result.data);
-    });
-});
-
-searchForm.addEventListener('submit', async (event) => {
-    event.preventDefault();
-
-    const formData = new FormData(searchForm);
-    const query = formData.get('query');
-
-    const result = await searchPaintings(query);
-
-    if (result.error) {
+// --- Initial Load ---
+const init = async () => {
+    const result = await getCollection();
+    if(result.error) {
         errorMessage.textContent = result.error.message;
         return;
     }
-    
-    errorMessage.textContent = '';
-    
+    collectionCache = result.data; // store collection
     renderCollection(result.data);
-    
+};
+init();
+
+// --- Clicking on a collection item ---
+collectionList.addEventListener('click', async (event) => {
+    const clickedPainting = event.target.closest('li');
+    if (!clickedPainting) return;
+
+    const paintingId = clickedPainting.dataset.id;
+    const result = await getSingleArt(paintingId);
+    if(result.error) {
+        errorMessage.textContent = result.error.message;
+        return;
+    }
+
+    collectionSection.style.display = 'none';
+    singleArtContainer.style.display = 'block';
+    renderSingleArt(result.data);
+
+    document.getElementById('close-single').addEventListener('click', () => {
+        singleArtContainer.style.display = 'none';
+        collectionSection.style.display = 'block';
+    });
+});
+
+// --- Search functionality ---
+searchForm.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const query = searchForm.query.value;
+
+    const result = await searchPaintings(query);
+    if(result.error) {
+        errorMessage.textContent = result.error.message;
+        return;
+    }
+    collectionCache = result.data; // update cache
+    errorMessage.textContent = '';
+    renderCollection(result.data);
     searchForm.reset();
+});
+
+// --- Random artwork button ---
+randomBtn.addEventListener('click', async () => {
+    if (!collectionCache.length) {
+        errorMessage.textContent = 'Collection not loaded yet';
+        return;
+    }
+
+    const randomIndex = Math.floor(Math.random() * collectionCache.length);
+    const randomArt = collectionCache[randomIndex];
+
+    const result = await getSingleArt(randomArt.id);
+    if (result.error || !result.data) {
+        errorMessage.textContent = result.error?.message || 'Failed to load random artwork';
+        return;
+    }
+
+    errorMessage.textContent = '';
+    collectionSection.style.display = 'none';
+    singleArtContainer.style.display = 'block';
+    renderSingleArt(result.data);
+
+    document.getElementById('close-single').addEventListener('click', () => {
+        singleArtContainer.style.display = 'none';
+        collectionSection.style.display = 'block';
+    });
 });
