@@ -19,12 +19,12 @@ export const renderCollection = (collection) => {
             img.src = `https://www.artic.edu/iiif/2/${painting.image_id}/full/843,/0/default.jpg`;
             img.alt = `${painting.title} by ${painting.artist_display}`;
 
-            img.onerror = () => {
+            img.onerror = () => 
             img.remove();
-            };
+            
       
             li.append(img);
-
+            }
         titleH3.textContent = painting.title;
         artistP.textContent = painting.artist_display;
 
