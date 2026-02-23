@@ -58,16 +58,23 @@ collectionList.addEventListener('click', async (event) => {
 // --- Search functionality ---
 searchForm.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const query = searchForm.query.value;
+
+    const formData = new FormData(searchForm);
+    const query = formData.get('query');
 
     const result = await searchPaintings(query);
-    if(result.error) {
+
+    if (result.error) {
         errorMessage.textContent = result.error.message;
         return;
     }
-    collectionCache = result.data; // update cache
+    
     errorMessage.textContent = '';
+  
+    collectionCache = result.data; // update cache
+    
     renderCollection(result.data);
+    
     searchForm.reset();
 });
 

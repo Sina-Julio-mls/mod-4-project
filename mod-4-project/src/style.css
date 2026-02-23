@@ -1,0 +1,43 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#error-message {
+  color: red;
+  min-height: 1.25rem;
+}
+
+#collection-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+  padding: 0;
+  margin: 0;
+}
+
+#collection-list li {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+#collection-list img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+#collection-list li h3 {
+  margin: 0;
+  font-size: 1rem;
+}
+
+#collection-list li p {
+  margin: 0;
+  font-size: 0.8rem;
+  color: #555;
+}

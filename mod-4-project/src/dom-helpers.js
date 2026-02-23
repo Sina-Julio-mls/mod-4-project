@@ -3,12 +3,15 @@
 
 //Render collection list
 export const renderCollection = (collection) => {
-    const collectionList = document.getElementById('collection-list');
-    collectionList.innerHTML = ''; // clear previous collection
+    const collectionList = document.querySelector('#collection-list');
 
+    collectionList.replaceChildren();
 
     collection.forEach((painting) => {
         const li = document.createElement('li');
+        const titleH3 = document.createElement('h3');
+        const artistP = document.createElement('p');
+      
         li.dataset.id = painting.id;
 
         if(painting.image_id){
@@ -16,13 +19,11 @@ export const renderCollection = (collection) => {
             img.src = `https://www.artic.edu/iiif/2/${painting.image_id}/full/843,/0/default.jpg`;
             img.alt = `${painting.title} by ${painting.artist_display}`;
 
-            img.onerror = () => 
+            img.onerror = () => {
             img.remove();
+            };
+      
             li.append(img);
-            }
-        
-        const titleH3 = document.createElement('h3');
-        const artistP = document.createElement('p');
 
         titleH3.textContent = painting.title;
         artistP.textContent = painting.artist_display;

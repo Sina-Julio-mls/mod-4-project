@@ -36,7 +36,7 @@ export const getSingleArt = async (id) => {
 
 export const searchPaintings = async (query) => {
     try {
-        const response = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${encodeURIComponent(query)}&fields=id,title,image_id,artist_display&is_public_domain=true`);
+        const response = await fetch(`https://api.artic.edu/api/v1/artworks/search?q=${encodeURIComponent(query)}&fields=id,title,artist_display,image_id`);
 
         if(!response.ok) {
             throw new Error('Failed to search painting!');
