@@ -66,5 +66,5 @@ export const renderSingleArt = (art) =>{
     
    
 
-    section.append(closeBtn,img,h2,artwork,year,credit,place,description)
+    section.append(img,h2,artwork,year,credit,place,description,closeBtn)
 };
