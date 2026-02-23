@@ -13,25 +13,28 @@
 
     <p id="error-message"></p>
 
+    <!--Search Section-->
     <div class="art-container">
       <form class="art-container-flex" id="search-item">
-        <input type="text" id="search" name="query">
-        <button class="search-button" type="submit">Search bar</button>
+        <input type="text" id="search" name="query" placeholder="Search for an artwork...">
+        <button class="search-button" type="submit">Search</button>
       </form>
       <button class="random-button" id="random">Random search</button>
-
+      </div>
       <p>Search for your favorite art work</p>
-    </div>
+    
   </div>
+
+  <!--Collection Section-->
     <section id="collection">
       <h2>Paintings</h2>
-      <ul id="collection-list">
-            
-      </ul>
+      <ul id="collection-list"></ul>
     </section>
-    <h2>Single art</h2>
-    <div class="container">
-      <div id="single-art-container"></div>
+
+    <!--single Art Section-->
+  <div class="container" id="single-art-container" style="display: none;">
+
+  </div>
     </div>
     <script type="module" src="src/main.js"></script>
 </body>
