@@ -108,3 +108,7 @@ Can click the random search to get one painting random from the collection
 * Git
 
 * GitHub
+
+### AI Usage
+
+This project provided me an opportunity to build something with AI assistance. Check out my [AI Usage Document](https://docs.google.com/document/d/1PsFJvD1RF9I876SPCfpiXjHpbEVKnxlAOYBWKqDUZ34/edit?usp=sharing) to see how I used AI on this project.
