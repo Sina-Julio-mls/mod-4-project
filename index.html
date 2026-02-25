@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/mod-4-project/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Art viewer</title>
+    <script type="module" crossorigin src="/mod-4-project/assets/index-DkTujHxX.js"></script>
+    <link rel="stylesheet" crossorigin href="/mod-4-project/assets/index-Bu0suGzC.css">
+  </head>
+<body>
+  <header>
+    <h1>Art Collection</h1>
+  </header>
+  <main>
+    <div class="container">
+
+    <p id="error-message"></p>
+
+    <!--Search Section-->
+    <div class="art-container">
+      <form class="art-container-flex" id="search-item">
+        <input type="text" id="search" name="query" placeholder="Search for an artwork..." autocomplete="off" required>
+        <button class="search-button" type="submit">Search</button>
+      </form>
+      <button class="random-button" id="random">Random search</button>
+      </div>
+      <p>Search for your favorite art work</p>
+    
+  </div>
+
+  <!--Collection Section-->
+    <section id="collection">
+      
+      <ul id="collection-list"></ul>
+    </section>
+
+    <!--single Art Section-->
+  <div class="container" id="single-art-container" style="display: none;">
+
+  </div>
+    </div>
+  </main>
+</body>
+</html>
